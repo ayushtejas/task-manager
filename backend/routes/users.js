@@ -18,7 +18,7 @@ router.post('/login',(req,res)=>{
                     res.status(201).json({
                         message: 'User logged in successfully',
                         data: {
-                            name: `${item.firstName} +' '+ ${item.lastName}`,
+                            name: `${item.firstName} ${item.lastName}`,
                             email: item.email,
                             token: token
                         }
