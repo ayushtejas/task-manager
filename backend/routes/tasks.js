@@ -50,18 +50,20 @@ router.delete('/delete-task/:id', authenticateToken, async (req, res) => {
     }
 });
 
-router.get('/get-task/:id', authenticateToken,(req,res)=>{
+router.get('/get-task/:id', authenticateToken,async (req,res)=>{
     const id = req.params.id;
     try {
-        const task = tasks.findOne({userId: req.user.item._id,_id:id})
+        const task = await tasks.findOne({userId: req.user.item._id,_id:id})
 
         if(!task){
             return res.status(404).json({error:'Task not found'})
         }
+        console.log(task)
 
-        return res.status(200).json(res.json(task))
+        return res.status(200).json(task)
     }
     catch(err){
+        console.log(err)
         res.status(500).json({message:'Error finding Task'})
     }
 })
